@@ -7,7 +7,7 @@ import { photoDisliked, photoLiked } from './photosSlice';
 
 const ListHeader = ({ onSearch }) => (
     <TextInput
-        placeholder='Search NFTs'
+        placeholder='Search photos'
         style={{
             flex: 1,
             color: '000',
