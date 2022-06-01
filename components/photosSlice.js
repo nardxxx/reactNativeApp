@@ -34,6 +34,9 @@ const photosSlice = createSlice({
             .addCase(fetchPhotos.fulfilled, (state, action) => {
                 state.photos = action.payload;
             })
+            .addCase(fetchPhotos.rejected, (state, action) => {
+                console.log('fetching error');
+            })
             .addDefaultCase(() => { })
     }
 })
