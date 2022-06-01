@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
     persistStore,
     persistReducer,
@@ -9,21 +10,23 @@ import {
     PURGE,
     REGISTER
 } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+// import storage from 'redux-persist/lib/storage';
 
 import photosReducer from '../components/photosSlice'
 
-const rootReducer = combineReducers({ photos: photosReducer });
-
 const persistConfig = {
     key: 'root',
-    storage
+    storage: AsyncStorage,
+    blacklist: ['photos']
 }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const rootReducer = combineReducers({
+    photos: persistReducer(persistConfig, photosReducer)
+});
+
 
 const store = configureStore({
-    reducer: persistedReducer,
+    reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
