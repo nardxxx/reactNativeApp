@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 
 const ListHeader = ({ onSearch }) => (
     <TextInput
-        placeholder='Search NFTs'
+        placeholder='Search photos'
         style={styles.input}
         onChangeText={onSearch}
     />
